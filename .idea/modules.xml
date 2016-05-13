@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WxImportment.iml" filepath="$PROJECT_DIR$/WxImportment.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/weixinJx.iml" filepath="$PROJECT_DIR$/weixinJx.iml" />
     </modules>
   </component>
 </project>
