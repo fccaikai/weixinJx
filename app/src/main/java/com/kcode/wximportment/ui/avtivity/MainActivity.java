@@ -1,33 +1,49 @@
 package com.kcode.wximportment.ui.avtivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.kcode.wximportment.R;
 import com.kcode.wximportment.ui.fragment.ListFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
+    private ListFragment listFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.app_name);
-        setSupportActionBar(toolbar);
+        setToolBarTitle(R.string.app_name);
 
-        ListFragment listFragment = (ListFragment) getSupportFragmentManager().findFragmentByTag(ListFragment.class.getSimpleName());
+        FloatingActionButton fab = find(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listFragment != null){
+                    listFragment.onRefresh();
+                }
+            }
+        });
+
+        listFragment = (ListFragment) getSupportFragmentManager().findFragmentByTag(ListFragment.class.getSimpleName());
         if(listFragment == null){
+
+            listFragment = new ListFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container,new ListFragment(),ListFragment.class.getSimpleName())
+                    .add(R.id.container,listFragment,ListFragment.class.getSimpleName())
                     .commit();
         }
 
+    }
+
+    @Override
+    protected void setContentView() {
+        setContentView(R.layout.activity_main);
     }
 
     @Override
@@ -40,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.more){
-
+            Intent intent = new Intent(MainActivity.this,AboutActivity.class);
+            startActivity(intent);
             return true;
         }else {
             return super.onOptionsItemSelected(item);
