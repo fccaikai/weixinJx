@@ -4,4 +4,5 @@
     <string name="load_failed">数据加载失败</string>
 
     <string name="home_page">首页</string>
+    <string name="menu_share">分享</string>
 </resources>
